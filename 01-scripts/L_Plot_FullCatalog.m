@@ -5,7 +5,7 @@
 %
 % Yellow bar   : all SP>=5 events from A_All.mat per bin
 % Stacked bars : N (blue) | R (red) | S (green) | U (black)
-%                from Event1D_3D_Final.mat (quality A/B only)
+%                from Event1D_3D_Final.mat (all quality grades)
 %
 % Figure 1: 30-day bins — full y-axis
 % Figure 2: 30-day bins — y capped at 90th percentile
@@ -44,12 +44,7 @@ clear Felix;
 %% ============================================================
 load(fullfile(cfg.dataDir, 'Event1D_3D_Final.mat'));  % event3D, Po_Clu
 
-% Quality filter (keep A and B only)
-if isfield(event3D, 'mechqual')
-    event3D([event3D.mechqual] == 'C') = [];
-    event3D([event3D.mechqual] == 'D') = [];
-end
-fprintf('FM catalog: %d events after A/B quality filter\n', numel(event3D));
+fprintf('FM catalog: %d events (all quality grades)\n', numel(event3D));
 
 % Map cluster id -> origin time via Po_Clu
 clust_vec = [Po_Clu.Cluster];
